@@ -1,28 +1,22 @@
 import { Form, Button } from "react-bootstrap";
 import ListaTareas from "./ListaTareas";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const FormularioTarea = () => {
-  const tareasDelLocalStorage = JSON.parse(localStorage.getItem('listaTareas')) || [];
   const [tarea, setTarea] = useState("");
-  const [tareas, setTareas] = useState(tareasDelLocalStorage);
-  
-  //ciclo de vida
-  useEffect(()=>{
-   localStorage.setItem('listaTareas', JSON.stringify(tareas));
-  }, [tareas])
+  const [tareas, setTareas] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setTareas([...tareas, tarea]);
     //limpiar el input
-    setTarea('');
+    setTarea("");
   };
 
-  const borrarTarea = (nombreTarea)=>{
-    let copiaTareas = tareas.filter((itemTarea)=> itemTarea !== nombreTarea);
+  const borrarTarea = (nombreTarea) => {
+    let copiaTareas = tareas.filter((itemTarea) => itemTarea !== nombreTarea);
     setTareas(copiaTareas);
-  }
+  };
 
   return (
     <>
